@@ -4,17 +4,17 @@ import com.dias.thecats.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import java.util.concurrent.TimeUnit
 
-interface ApiService {
+interface CatApi {
     @GET("images/search?limit=10")
-    fun getCatImages(): Call<List<Cat>>
+    suspend fun getCatImages(): List<Cat>
+
     companion object {
-        fun getApiService(): ApiService {
+        fun getApiService(): CatApi {
             val httpLoggingInterceptor = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
@@ -33,7 +33,7 @@ interface ApiService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
-                .create(ApiService::class.java)
+                .create(CatApi::class.java)
         }
 
         private fun defaultHttpClient(): Interceptor {

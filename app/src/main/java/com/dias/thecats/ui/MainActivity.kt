@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.dias.thecats.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,12 +23,13 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.loadImages()
         val adapter = CatAdapter()
         binding.rvMain.adapter = adapter
         viewModel.catImages.observe(this) {
             Log.d("MainActivity", "$it")
-            adapter.submitList(it)
+            lifecycleScope.launch {
+                adapter.submitData(it)
+            }
         }
     }
 }

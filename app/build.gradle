@@ -63,4 +63,14 @@ dependencies {
 
     // life cycle
     implementation 'androidx.activity:activity-ktx:1.5.1'
+
+    // paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+    implementation 'androidx.paging:paging-common:3.1.1'
+    implementation 'androidx.paging:paging-rxjava2:3.1.1'
+
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:3.0.0"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 }
