@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
         MainViewModelProvider()
     }
 
+    private val swipeRefreshLayout by lazy {
+        binding.srlMain
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.catImages.observe(this) {
             Log.d("MainActivity", "$it")
             adapter.submitList(it)
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadImages()
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 }
