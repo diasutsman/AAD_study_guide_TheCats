@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.dias.thecats.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,11 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = CatAdapter()
         binding.rvMain.adapter = adapter
-        viewModel.catImages.observe(this) {
-            Log.d("MainActivity", "$it")
-            lifecycleScope.launch {
-                adapter.submitData(it)
-            }
+        lifecycleScope.launch {
+            viewModel.catImagesFlow.collectLatest(adapter::submitData)
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dias.thecats.data.Cat
 import com.dias.thecats.data.CatImagesRepository
+import kotlinx.coroutines.flow.Flow
 
 private const val PAGE_SIZE = 10
 
@@ -25,7 +26,5 @@ class MainViewModel(repository: CatImagesRepository) : ViewModel() {
 //        }
 //    )
 
-    val catImages: LiveData<PagingData<Cat>> = repository.getCatStream()
-        .asLiveData(viewModelScope.coroutineContext)
-        .cachedIn(viewModelScope)
+    val catImagesFlow: Flow<PagingData<Cat>> = repository.getCatStream().cachedIn(viewModelScope)
 }
