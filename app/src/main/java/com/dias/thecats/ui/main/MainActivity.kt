@@ -1,10 +1,11 @@
-package com.dias.thecats.ui
+package com.dias.thecats.ui.main
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dias.thecats.databinding.ActivityMainBinding
+import com.dias.thecats.ui.CatAdapter
 
 class MainActivity : AppCompatActivity() {
 

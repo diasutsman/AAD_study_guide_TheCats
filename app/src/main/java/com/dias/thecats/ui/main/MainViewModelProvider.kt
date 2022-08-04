@@ -1,4 +1,4 @@
-package com.dias.thecats.ui
+package com.dias.thecats.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

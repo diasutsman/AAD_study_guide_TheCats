@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="kotlin.jvm.functions.Function0" />
+
+        <import type="kotlin.Unit" />
+
         <variable
             name="cat"
             type="com.dias.thecats.data.Cat" />
+
+        <variable
+            name="onClick"
+            type="Function0&lt;Unit>" />
     </data>
 
-    <ImageView
-        imageUrl="@{cat.url}"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/txt_cat_desc"
-        tools:src="@tools:sample/avatars" />
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> onClick.invoke()}"
+        app:cardCornerRadius="0dp">
+
+        <ImageView
+            android:id="@+id/cat_img"
+            imageUrl="@{cat.url}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/txt_cat_desc"
+            tools:src="@tools:sample/avatars" />
+    </com.google.android.material.card.MaterialCardView>
 </layout>
