@@ -6,26 +6,29 @@ import androidx.paging.PagingState
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val START_KEY = 0
+private const val CAT_STARTING_PAGE_INDEX = 0
 
 class CatPagingSource(
     private val catApi: CatApi,
 ) : PagingSource<Int, Cat>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Cat> {
-        val start = params.key ?: START_KEY
+        val position = params.key ?: CAT_STARTING_PAGE_INDEX
 
-        val data = catApi.getCatImages()
-        Log.d("CatPagingSource", "load: $data")
+        val cats = catApi.getCatImages(position, params.loadSize)
+        Log.d("CatPagingSource", "load: $cats")
+
+        val nextKey = if(cats.isEmpty()) {
+            null
+        } else {
+            position + 1
+        }
         return try {
 
             LoadResult.Page(
-                data = data,
-                prevKey = when (start) {
-                    START_KEY -> null
-                    else -> start - 1
-                },
-                nextKey = start + 1
+                data = cats,
+                prevKey = if(position == CAT_STARTING_PAGE_INDEX) null else position - 1,
+                nextKey = nextKey
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)

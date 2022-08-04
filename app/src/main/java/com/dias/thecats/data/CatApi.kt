@@ -7,11 +7,15 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface CatApi {
     @GET("images/search?limit=10")
-    suspend fun getCatImages(): List<Cat>
+    suspend fun getCatImages(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+    ): List<Cat>
 
     companion object {
         fun getApiService(): CatApi {
