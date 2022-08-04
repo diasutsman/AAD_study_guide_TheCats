@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">The Cats</string>
     <string name="txt_cat_desc">Cat image</string>
+    <string name="txt_download">Download</string>
 </resources>

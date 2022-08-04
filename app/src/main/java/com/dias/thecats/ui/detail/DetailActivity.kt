@@ -1,7 +1,9 @@
 package com.dias.thecats.ui.detail
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import com.dias.thecats.R
 import com.dias.thecats.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -17,6 +19,11 @@ class DetailActivity : AppCompatActivity() {
 
         binding.url = intent.extras?.getString(URL_KEY)
         title = ""
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSupportNavigateUp(): Boolean {
