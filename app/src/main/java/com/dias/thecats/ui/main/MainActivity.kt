@@ -1,19 +1,25 @@
-package com.dias.thecats.ui
+package com.dias.thecats.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.dias.thecats.databinding.ActivityMainBinding
+import com.dias.thecats.ui.CatAdapter
+import com.dias.thecats.ui.CatViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding as ActivityMainBinding
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelProvider()
+    private val viewModel: CatViewModel by viewModels {
+        CatViewModel.Provider(this)
     }
+
+    private val swipeRefreshLayout by lazy { binding.root }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadImages()
+            adapter.refresh()
             swipeRefreshLayout.isRefreshing = false
         }
     }

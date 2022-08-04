@@ -26,7 +26,7 @@ class CatAdapter : PagingDataAdapter<Cat, CatAdapter.CatViewHolder>(DIFF_CALLBAC
             onClick = {
                 ctx.startActivity(
                     Intent(ctx, DetailActivity::class.java)
-                        .putExtra(DetailActivity.URL_KEY, mCat.url)
+                        .putExtra(DetailActivity.URL_KEY, mCat?.url)
                 )
             }
         }

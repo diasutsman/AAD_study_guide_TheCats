@@ -1,10 +1,18 @@
 package com.dias.thecats.data
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.dias.thecats.R
+import kotlinx.coroutines.flow.Flow
+import java.util.*
 
-class CatImagesRepository(private val api: CatApi) {
+class CatImagesRepository(private val api: CatApi, private val context: Context) {
     fun getCatStream() : Flow<PagingData<Cat>> = Pager(
         config = PagingConfig(
             pageSize = PAGE_SIZE,

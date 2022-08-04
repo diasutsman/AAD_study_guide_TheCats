@@ -1,26 +1,16 @@
 package com.dias.thecats.ui
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.dias.thecats.data.Cat
+import com.dias.thecats.data.CatApi
 import com.dias.thecats.data.CatImagesRepository
+import kotlinx.coroutines.flow.Flow
 
 class CatViewModel(private val repository: CatImagesRepository) : ViewModel() {
-
-    private val _catImages = MutableLiveData<List<Cat>?>()
-    val catImages = _catImages as LiveData<List<Cat>?>
-
-    fun loadImages() = repository.getCatImages(
-        onSuccess = {
-            _catImages.value = it
-        },
-        onFailure = {
-            _catImages.value = null
-        }
-    )
+    val catImagesFlow: Flow<PagingData<Cat>> = repository.getCatStream().cachedIn(viewModelScope)
 
     fun downloadImage(url: String?) {
         if (url == null) return
@@ -31,7 +21,7 @@ class CatViewModel(private val repository: CatImagesRepository) : ViewModel() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(CatViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return CatViewModel(CatImagesRepository(context)) as T
+                return CatViewModel(CatImagesRepository(CatApi.getApiService(), context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
