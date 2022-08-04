@@ -6,14 +6,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dias.thecats.databinding.ActivityMainBinding
 import com.dias.thecats.ui.CatAdapter
+import com.dias.thecats.ui.CatViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding as ActivityMainBinding
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelProvider()
+    private val viewModel: CatViewModel by viewModels {
+        CatViewModel.Provider(this)
     }
 
     private val swipeRefreshLayout by lazy {
