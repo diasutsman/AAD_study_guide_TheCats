@@ -4,11 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import com.dias.thecats.databinding.ActivityMainBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         binding.rvMain.adapter = adapter
         lifecycleScope.launch {
             viewModel.catImagesFlow.collectLatest(adapter::submitData)
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadImages()
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 }
