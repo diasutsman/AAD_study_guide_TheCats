@@ -16,7 +16,8 @@ class CatImagesRepository(private val api: CatApi, private val context: Context)
     fun getCatStream() : Flow<PagingData<Cat>> = Pager(
         config = PagingConfig(
             pageSize = PAGE_SIZE,
-            enablePlaceholders = false
+            enablePlaceholders = false,
+            initialLoadSize = PAGE_SIZE
         ),
         pagingSourceFactory = { CatPagingSource(api) }
     ).flow
