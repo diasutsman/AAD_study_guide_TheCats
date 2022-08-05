@@ -2,4 +2,5 @@
     <string name="app_name">The Cats</string>
     <string name="txt_cat_desc">Cat image</string>
     <string name="txt_download">Download</string>
+    <string name="txt_transition_name">transition %s</string>
 </resources>

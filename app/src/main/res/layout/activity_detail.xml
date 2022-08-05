@@ -5,13 +5,16 @@
     <data>
 
         <variable
-            name="url"
-            type="String" />
+            name="cat"
+            type="com.dias.thecats.data.Cat" />
     </data>
 
     <com.dias.thecats.ui.views.TouchImageView
-        imageUrl="@{url}"
+        android:id="@+id/iv_cat"
         android:layout_width="match_parent"
+        imageUrl="@{cat.url}"
+        dontTransform="false"
         android:layout_height="match_parent"
+        android:transitionName="@{@string/txt_transition_name(cat.id)}"
         tools:context=".ui.detail.DetailActivity" />
 </layout>

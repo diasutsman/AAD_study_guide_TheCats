@@ -38,11 +38,13 @@
             <ImageView
                 android:id="@+id/cat_img"
                 imageUrl="@{cat.url}"
+                android:transitionName="@{@string/txt_transition_name(cat.id)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/txt_cat_desc"
+                dontTransform="true"
                 tools:src="@tools:sample/avatars" />
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

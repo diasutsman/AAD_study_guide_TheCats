@@ -1,5 +1,7 @@
 package com.dias.thecats.ui.main
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.dias.thecats.databinding.ActivityMainBinding
 import com.dias.thecats.ui.CatAdapter
 import com.dias.thecats.ui.CatViewModel
+import com.dias.thecats.ui.detail.DetailActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

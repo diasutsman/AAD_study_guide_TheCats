@@ -1,13 +1,20 @@
 package com.dias.thecats.ui.detail
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.dias.thecats.R
 import com.dias.thecats.databinding.ActivityDetailBinding
 import com.dias.thecats.ui.CatViewModel
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -24,7 +31,9 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(binding.root)
 
-        binding.url = intent.extras?.getString(URL_KEY)
+        binding.apply {
+            cat = intent.extras?.getParcelable(URL_KEY)
+        }
         title = ""
     }
 
@@ -34,8 +43,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_download -> viewModel.downloadImage(binding.url)
+        when (item.itemId) {
+            R.id.action_download -> viewModel.downloadImage(binding.cat?.url)
         }
         return super.onOptionsItemSelected(item)
     }
