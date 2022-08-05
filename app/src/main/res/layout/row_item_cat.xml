@@ -18,21 +18,32 @@
             type="Function0&lt;Unit>" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="@{() -> onClick.invoke()}"
-        app:cardCornerRadius="0dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/cat_img"
-            imageUrl="@{cat.url}"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/txt_cat_desc"
-            tools:src="@tools:sample/avatars" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> onClick.invoke()}"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/cat_img"
+                imageUrl="@{cat.url}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/txt_cat_desc"
+                tools:src="@tools:sample/avatars" />
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
